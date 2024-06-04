@@ -34,7 +34,7 @@ dependencies {
     //테스트 환경에서, 롬복 이용하기.
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
-
+    implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.1.0'
 
 }
 

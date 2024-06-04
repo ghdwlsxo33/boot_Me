@@ -57,4 +57,11 @@ public class SampleController {
 
         model.addAttribute("dto",sampleDTO);
     }
+
+    @GetMapping("/ex/ex3")
+    public void ex3(Model model) {
+        log.info("/ex/ex3~~~~~~~~~~~");
+        List<String> list = Arrays.asList("도시락","라면","김밥","볶음밥");
+        model.addAttribute("list",list);
+    }
 }
