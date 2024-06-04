@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>타임리프 출력하는 방법
+1.인라인 으로 출력하는 방법</h1>
+    <h1 th:text="${list}"></h1>
+<h1>2.태그 밖에서 출력하는 방법</h1>
+    <h2>[[${list}]]</h2>
+
+<h2>변수 선언!1</h2>
+<div th:with = "num1 = ${10}, num2 =${20}">
+    <h2>변수 사용</h2>
+    <h3 th:text ="${num1 + num2}"></h3>
+</div>
+    <h2>변수 선언!2</h2>
+    <div th:with = "num1 = ${'홍진태'}, num2 =${'홍진태2'}">
+        <h2>변수 사용</h2>
+        <h3 th:text ="${num1 + num2}"></h3>
+</div>
+<h2>변수 선언!3</h2>
+<div th:with = "num1 = '홍진태', num2 ='홍진태2'">
+    <h2>변수 사용</h2>
+    <h3 th:text ="${num1 + num2}"></h3>
+</div>
+
+<h2>변수 선언!4</h2>
+<div th:with = "num1 = 10, num2 =20">
+    <h2>변수 사용</h2>
+    <h3 th:text ="${num1 + num2}"></h3>
+</div>
+<h2>기본문법 : 목록에서 하나씩 꺼내서 반복작업하기.</h2>
+<!--<th:each="변수명 : 목록">-->
+<!--예시)-->
+<ul>
+    <li th:each="str : ${list}" th:text="${str}"></li>
+</ul>
+
+기본문법:
+<ul>
+    <th:block th:each="str : ${list}" >
+        <li> [[${str}]] </li>
+    </th:block >
+</ul>
+</body>
+</html>
+
+<!--예시)-->
+<h2>타임리프 반복문중에서 상태의 숫자세기(인덱스)</h2>
+<ul>
+    <li th:each="str , status : ${list}" >
+        [[${status.index}]]  --[[${str}]]
+    </li>
+
+</ul>
+
+<h2>타임리프 반복문중에서 상태의 숫자세기(홀수)</h2>
+<ul>
+    <li th:each="str , status : ${list}" >
+        [[${status.odd}]]  --[[${str}]]
+    </li>
+
+</ul>
+
+<h2>타임리프 반복문중에서 상태의 숫자세기(짝수)</h2>
+<ul>
+    <li th:each="str , status : ${list}" >
+        [[${status.even}]]  --[[${str}]]
+    </li>
+
+</ul>
+
+
+조건문,
+th:if, th:unless, th:switch
+
+<!--예시)-->
+<ul>
+    <li th:each="str , status: ${list}" >
+        <span th:if="${status.odd}"> 홀수  [[${str}]]</span>
+        <span th:unless="${status.odd}"> 짝수  [[${str}]]</span>
+    </li>
+</ul>
+th:switch 예제
+<ul>
+    <li th:each="str , status: ${list}" >
+        <th:block th:switch="${status.index % 3}">
+            <span th:case="0"> index:0  [[${str}]]</span>
+            <span th:case="1"> index:1  [[${str}]]</span>
+            <span th:case="2"> index:2  [[${str}]]</span>
+        </th:block>
+    </li>
+</ul>
+타임리프로 링크 처리
+기본 문법
+<a th:href="@{/hello}">연습용 /hello 가기 </a>
+
+<br>
+
+링크의 쿼리 스트링 처리
+기본 문법
+<a th:href = "@{/hello(name = '홍진태', age = 30)}">연습용 쿼리스트링 달고 /hello 가기</a>
+
+<br>
+기본 문법 2
+
+<a th:href ="@{/hello(types=${ {'홍진태','홍진태2'} })}">연습용 쿼리스트링 달고 /hello 가기2</a>
+<br>
+<a th:href ="@{/hello(types=${ {'AA','BB','CC'} }, age= 16)}">연습용 쿼리스트링 달고 /hello 가기3</a>
